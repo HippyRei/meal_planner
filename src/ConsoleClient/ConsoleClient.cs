@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace MealPlanner
 {
@@ -10,6 +7,12 @@ namespace MealPlanner
 	{
 		static void Main(string[] args)
 		{
-		}
+            Console.WriteLine("Connecting to MealPlanner.sqlite");
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=MealPlanner.sqlite;Version=3;");
+            m_dbConnection.Open();
+            Console.WriteLine("Success!");
+            Console.Read();
+        }
 	}
 }
