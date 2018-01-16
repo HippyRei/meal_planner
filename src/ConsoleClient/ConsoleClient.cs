@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MealPlanner
 {
-	class Program
+	class ConsoleClient
 	{
 		static void Main(string[] args)
 		{
