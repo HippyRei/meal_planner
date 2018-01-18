@@ -69,6 +69,7 @@
     <Compile Include="ConsoleClient.cs" />
     <Compile Include="DatabaseHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sql\MealPlannerCreate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

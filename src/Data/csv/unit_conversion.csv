@@ -1,0 +1,12 @@
+from	to	ratio
+ozm	ozm	1
+tbs	tbs	1
+tbs	tsp	3
+tbs	cup	0.0625
+cup	cup	1
+cup	tbs	16
+cup	tsp	48
+tsp	tsp	1
+tsp	tbs	0.333
+tsp	cup	0.0208
+unit	unit	1
