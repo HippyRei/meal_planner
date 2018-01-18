@@ -1,11 +1,10 @@
-﻿
-namespace MealPlanner.Sql
+﻿namespace MealPlanner.Sql
 {
-    
+
     /// <summary>
     /// Class that contains all of the CREATE TABLE SQL commands.
     /// </summary>
-    class MealPlannerCreate
+    public static class MealPlannerCreate
     {
         /// <summary>
         /// Creates the unit conversion table. `from` is the unit of the value being converted, `to` is the unit
@@ -29,12 +28,12 @@ namespace MealPlanner.Sql
         public const string createNutritionTable = "CREATE TABLE `nutrition` (" +
                                                     "`ingredient_name`	TEXT NOT NULL," +
                                                     "`quantity`	REAL NOT NULL CHECK(`quantity` > 0)," +
-                                                    "`unit` TEXT NOT NULL," + 
+                                                    "`unit` TEXT NOT NULL," +
                                                     "`fat`	REAL NOT NULL DEFAULT 0 CHECK(fat >= 0)," +
                                                     "`carb`	REAL NOT NULL DEFAULT 0 CHECK(carb >= 0)," +
                                                     "`prot`	REAL NOT NULL DEFAULT 0 CHECK(prot >= 0)," +
                                                     "`fiber` REAL NOT NULL DEFAULT 0 CHECK(fiber >= 0)," +
-                                                    "`sugar` REAL NOT NULL DEFAULT 0 CHECK(sugar >= 0)," + 
+                                                    "`sugar` REAL NOT NULL DEFAULT 0 CHECK(sugar >= 0)," +
                                                     "FOREIGN KEY(`unit`) REFERENCES `Unit_Conversion`(`to`)" +
                                                     "UNIQUE(`ingredient_name`,`unit`));";
 
@@ -45,14 +44,14 @@ namespace MealPlanner.Sql
         /// `servings` must be greater than 0 and all meal flags must be 0 or 1.
         /// </summary>
         public const string createRecipeTable = "CREATE TABLE `recipes` (" +
-	                                            "`recipe_name` TEXT NOT NULL," +
+                                                "`recipe_name` TEXT NOT NULL," +
                                                 "`instructions` TEXT," +
-	                                            "`servings` REAL NOT NULL CHECK(servings > 0)," +
-	                                            "`breakfast` INTEGER NOT NULL DEFAULT 0 CHECK(breakfast IN ( 0 , 1 ))," +
-	                                            "`lunch` INTEGER NOT NULL DEFAULT 0 CHECK(lunch IN ( 0 , 1 ))," +
-	                                            "`dinner` INTEGER NOT NULL DEFAULT 0 CHECK(dinner IN ( 0 , 1 ))," +
-	                                            "`snack` INTEGER NOT NULL DEFAULT 0 CHECK(snack IN ( 0 , 1 ))," +
-	                                            "PRIMARY KEY(`recipe_name`));";
+                                                "`servings` REAL NOT NULL CHECK(servings > 0)," +
+                                                "`breakfast` INTEGER NOT NULL DEFAULT 0 CHECK(breakfast IN ( 0 , 1 ))," +
+                                                "`lunch` INTEGER NOT NULL DEFAULT 0 CHECK(lunch IN ( 0 , 1 ))," +
+                                                "`dinner` INTEGER NOT NULL DEFAULT 0 CHECK(dinner IN ( 0 , 1 ))," +
+                                                "`snack` INTEGER NOT NULL DEFAULT 0 CHECK(snack IN ( 0 , 1 ))," +
+                                                "PRIMARY KEY(`recipe_name`));";
 
         /// <summary>
         /// Creates the ingredients table. `recipe_name` is the name of the recipe, `ingredient_name` is the name of an

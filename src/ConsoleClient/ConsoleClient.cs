@@ -1,16 +1,19 @@
-﻿using System;
-using System.Data.SQLite;
+﻿using MealPlanner.Common;
+using System;
 
-namespace MealPlanner
+namespace MealPlanner.Client
 {
-	class ConsoleClient
+	/// <summary>
+    /// Text-based client to use the application
+    /// </summary>
+    class ConsoleClient
 	{
-        const string path_to_db = "C:\\sqlite\\MealPlanner\\MealPlanner.sqlite";
 		static void Main(string[] args)
 		{
-            DatabaseHandler h = new DatabaseHandler(path_to_db);
-            h.CreateTables();
-            h.Close();
+            DatabaseHandler dbHandler = new DatabaseHandler(GlobalConstants.dbPath);
+            Console.Read();
+            dbHandler.CreateTables();
+            dbHandler.Close();
         }
 	}
 }
