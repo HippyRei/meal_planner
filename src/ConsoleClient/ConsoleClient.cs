@@ -11,8 +11,7 @@ namespace MealPlanner.Client
 		static void Main(string[] args)
 		{
             DatabaseHandler dbHandler = new DatabaseHandler(GlobalConstants.dbPath);
-            Console.Read();
-            dbHandler.CreateTables();
+            dbHandler.CreateTables(true);
             dbHandler.Close();
         }
 	}

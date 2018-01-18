@@ -1,4 +1,5 @@
-﻿namespace MealPlanner.Common
+﻿
+namespace MealPlanner.Common
 {
     /// <summary>
     /// Constants used by many classes.

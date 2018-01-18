@@ -44,12 +44,21 @@ namespace MealPlanner.Common
         /// <summary>
         /// Creates all necessary tables in the database.
         /// </summary>
-        public void CreateTables()
+        /// <param name="overwrite">If true is passed, former tables will be dropped. Otherwise, an exception
+        /// will be thrown if the table already exists.</param>
+        public void CreateTables(bool overwrite)
         {
-            new SQLiteCommand(MealPlannerCreate.createRecipeTable, dbConnection).ExecuteNonQuery();
-            new SQLiteCommand(MealPlannerCreate.createUnitConversionTable, dbConnection).ExecuteNonQuery();
-            new SQLiteCommand(MealPlannerCreate.createNutritionTable, dbConnection).ExecuteNonQuery();
-            new SQLiteCommand(MealPlannerCreate.createIngredientTable, dbConnection).ExecuteNonQuery();
+            if (overwrite)
+            {
+                dropIfExists(SqlConstants.ingredientTableName);
+                dropIfExists(SqlConstants.nutritionTableName);
+                dropIfExists(SqlConstants.recipeTableName);
+                dropIfExists(SqlConstants.unitConversionTableName);
+            }
+            new SQLiteCommand(MealPlannerSchema.createRecipeTable, dbConnection).ExecuteNonQuery();
+            new SQLiteCommand(MealPlannerSchema.unitConversionTableSchema, dbConnection).ExecuteNonQuery();
+            new SQLiteCommand(MealPlannerSchema.createNutritionTable, dbConnection).ExecuteNonQuery();
+            new SQLiteCommand(MealPlannerSchema.createIngredientTable, dbConnection).ExecuteNonQuery();
         }
 
         /// <summary>
@@ -62,6 +71,16 @@ namespace MealPlanner.Common
             SQLiteCommand getTable = new SQLiteCommand(MealPlannerQuery.doesTableExist, dbConnection);
             getTable.Parameters.AddWithValue("$table_name", tableName);
             return getTable.ExecuteReader().Read();
+        }
+
+        /// <summary>
+        /// Drops the given table if it exists.
+        /// </summary>
+        /// <param name="tableName">The name of the table to drop</param>
+        private void dropIfExists(string tableName)
+        {
+            SQLiteCommand dropTable = new SQLiteCommand(string.Format(MealPlannerQuery.dropTableIfExists, tableName), dbConnection);
+            dropTable.ExecuteNonQuery();
         }
     }
 }

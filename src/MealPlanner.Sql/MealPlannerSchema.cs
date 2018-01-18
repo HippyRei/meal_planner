@@ -4,14 +4,14 @@
     /// <summary>
     /// Class that contains all of the CREATE TABLE SQL commands.
     /// </summary>
-    public static class MealPlannerCreate
+    public static class MealPlannerSchema
     {
         /// <summary>
         /// Creates the unit conversion table. `from` is the unit of the value being converted, `to` is the unit
         /// the value is converted to, and `ratio` is the factor `from` is multiplied in order to become `to`.
         /// `ratio` must be positive.
         /// </summary>
-        public const string createUnitConversionTable = "CREATE TABLE `unit_conversion` (" +
+        public const string unitConversionTableSchema = "CREATE TABLE `unit_conversion` (" +
                                                         "`from` TEXT NOT NULL," +
                                                         "`to`	TEXT NOT NULL," +
                                                         "`ratio` REAL NOT NULL CHECK(`ratio` > 0)," +
