@@ -59,6 +59,7 @@ namespace MealPlanner.Common
             new SQLiteCommand(MealPlannerSchema.unitConversionTableSchema, dbConnection).ExecuteNonQuery();
             new SQLiteCommand(MealPlannerSchema.createNutritionTable, dbConnection).ExecuteNonQuery();
             new SQLiteCommand(MealPlannerSchema.createIngredientTable, dbConnection).ExecuteNonQuery();
+            
         }
 
         /// <summary>

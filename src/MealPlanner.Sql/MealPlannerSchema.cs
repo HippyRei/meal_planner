@@ -12,10 +12,10 @@
         /// `ratio` must be positive.
         /// </summary>
         public const string unitConversionTableSchema = "CREATE TABLE `unit_conversion` (" +
-                                                        "`from` TEXT NOT NULL," +
-                                                        "`to`	TEXT NOT NULL," +
+                                                        "`unit` TEXT NOT NULL," +
+                                                        "`type`	TEXT NOT NULL," +
                                                         "`ratio` REAL NOT NULL CHECK(`ratio` > 0)," +
-                                                        "UNIQUE(`from`,`to`));";
+                                                        "PRIMARY KEY(`unit`, `type`));";
 
         /// <summary>
         /// Creates the nutrition table. `ingredient_name` is the name of the ingredient, `quantity` is the number
@@ -29,13 +29,14 @@
                                                     "`ingredient_name`	TEXT NOT NULL," +
                                                     "`quantity`	REAL NOT NULL CHECK(`quantity` > 0)," +
                                                     "`unit` TEXT NOT NULL," +
+                                                    "`type` TEXT NOT NULL," +
                                                     "`fat`	REAL NOT NULL DEFAULT 0 CHECK(fat >= 0)," +
                                                     "`carb`	REAL NOT NULL DEFAULT 0 CHECK(carb >= 0)," +
                                                     "`prot`	REAL NOT NULL DEFAULT 0 CHECK(prot >= 0)," +
                                                     "`fiber` REAL NOT NULL DEFAULT 0 CHECK(fiber >= 0)," +
                                                     "`sugar` REAL NOT NULL DEFAULT 0 CHECK(sugar >= 0)," +
-                                                    "FOREIGN KEY(`unit`) REFERENCES `Unit_Conversion`(`to`)" +
-                                                    "UNIQUE(`ingredient_name`,`unit`));";
+                                                    "FOREIGN KEY(`unit`, `type`) REFERENCES `unit_conversion`(`unit`, `type`)" +
+                                                    "PRIMARY KEY(`ingredient_name`,`unit`, `type`));";
 
         /// <summary>
         /// Creates the recipe table. `recipe_name` is the name of the recipe, `servings` is the number of servings
@@ -64,10 +65,10 @@
                                                     "`ingredient_name` TEXT NOT NULL," +
                                                     "`quantity` REAL NOT NULL CHECK(quantity > 0)," +
                                                     "`unit` TEXT NOT NULL," +
-                                                    "FOREIGN KEY(`recipe_name`) REFERENCES `Recipes`(`recipe_name`)," +
-                                                    "FOREIGN KEY(`ingredient_name`) REFERENCES `Nutrition`(`ingredient_name`)," +
-                                                    "FOREIGN KEY(`unit`) REFERENCES `Unit_Conversion`(`from`)" +
-                                                    "UNIQUE(`recipe_name`, `ingredient_name`, `unit`));";
+                                                    "`type` TEXT NOT NULL," +
+                                                    "FOREIGN KEY(`recipe_name`) REFERENCES `recipes`(`recipe_name`)," +
+                                                    "FOREIGN KEY(`unit`, `type`) REFERENCES `unit_conversion`(`unit`, `type`)" +
+                                                    "PRIMARY KEY(`recipe_name`, `ingredient_name`, `unit`));";
 
     }
 }
