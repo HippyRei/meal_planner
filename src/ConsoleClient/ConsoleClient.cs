@@ -12,6 +12,11 @@ namespace MealPlanner.Client
 		{
             DatabaseHandler dbHandler = new DatabaseHandler(GlobalConstants.dbPath);
             //dbHandler.CreateTables(true);
+            dbHandler.addRecipe("Test", "Test", 1, false, false, false, false);
+            dbHandler.addUnit("Test", "Test", 1);
+            dbHandler.addNutrition("Test", 1, "Test", "Test", 1, 1, 1, 1, 1);
+            dbHandler.addIngredient("Test", "Test", 1, "Test", "Test");
+            Console.Read();
             dbHandler.Close();
         }
 	}
